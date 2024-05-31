@@ -135,8 +135,8 @@ The dataset is presented with the following directory structure:
 ```
 .
 |-- maps
-|   |-- mapping_miost_s3a_s3b_s6a-hr			      % MIOST reconstruction 3 nadirs			
-|   |-- mapping_miost_s3a_s3b_s6a-hr_swot		    % MIOST reconstruction 3 nadirs + 1 SWOT
+|   |-- mapping_miost_s3a_s3b_s6a-hr			  % MIOST reconstruction 3 nadirs			
+|   |-- mapping_miost_s3a_s3b_s6a-hr_swot		  % MIOST reconstruction 3 nadirs + 1 SWOT
 |   |-- mapping_miost_c2n_h2b_j3n_s3a_s3b_s6a-hr	% MIOST reconstruction 6 nadirs
 |   |-- mapping_miost_c2n_h2b_j3n_s3a_s3b_s6a-hr	% MIOST reconstruction 6 nadirs + 1 SWOT
 ```
