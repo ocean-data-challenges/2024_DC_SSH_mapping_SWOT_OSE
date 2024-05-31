@@ -39,6 +39,14 @@ To produce the gridded sea level maps, we used the global ocean sea level anomal
 #### SWOT sea-level anomaly Level 3 products
 In addition to the nadir altimetry constellation previously mentioned, we conducted experiments involving the integration of SWOT Level-3 Ocean product (specifically referencing [SWOT_L3_SSH](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/swot-l3-ocean-products.html)) during the 21-day phase of the mission. The SWOT_L3_SSH product combines ocean topography measurements collected from both the SWOT KaRIn and nadir altimeter instruments, consolidating them into a unified variable on a 2 km spatial grid spacing. For our investigation, we used version 0.3 & version 1.0 of the product accessible through the AVISO+ portal (AVISO/DUACS, 2023). These data were derived from the Level-2 "Beta Pre-validated" KaRIn Low Rate (Ocean) product (NASA/JPL and CNES).
 
+
+<p align="center">
+  <img src="figures/sampling.png" alt="Alt Text" width="800"/>
+</p>
+<p align="center">
+Figure: Spatial sampling of a) 3 nadirs altimeters, b) 7 nadirs altimeters and c) 1 SWOT
+</p>
+
 ### Data sequence and use
  
 The SSH reconstructions are assessed at global scale and over the period from 2023-08-01 to 2024-05-01.
