@@ -41,7 +41,7 @@ In addition to the nadir altimetry constellation previously mentioned, we conduc
 
 
 <p align="center">
-  <img src="figures/sampling.png" alt="Alt Text" width="800"/>
+  <img src="figures/sampling.png" alt="Alt Text" width="1000"/>
 </p>
 <p align="center">
 Figure: Spatial sampling of a) 3 nadirs altimeters, b) 7 nadirs altimeters and c) 1 SWOT
