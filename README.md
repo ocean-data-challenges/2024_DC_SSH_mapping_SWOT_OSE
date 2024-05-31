@@ -6,7 +6,8 @@ A challenge on the mapping of real nadirs and KaRin satellite altimeter sea surf
 # SWOT SSH Mapping Data Challenge 2024
 
 This repository contains codes and sample notebooks for downloading and processing the 2024 SWOT SSH mapping data challenge.
-Note that this data challenge is a somewhat extended version of the data challenge [2023a_SSH_mapping_OSE]([https://github.com/ocean-data-challenges/2023a_SSH_mapping_OSE]) on a global scale, using nadirs altiter data and the new Level-3 Karin data avaible since August 2023
+Note that this data challenge is a somewhat extended version of the data challenge [2023a_SSH_mapping_OSE]([https://github.com/ocean-data-challenges/2023a_SSH_mapping_OSE]) on a global scale. 
+Here, we are using nadirs altimeter data and the new Level-3 Karin data available since August 2023.
 
 # 1. Context & Motivation
 
