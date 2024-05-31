@@ -21,7 +21,9 @@ It is therefore becoming important to inform users and developers about the accu
 <p align="center">
   <img src="figures/dc_2024_ose_karin.png" alt="Alt Text" width="800"/>
 </p>
- 
+<p align="center">
+Figure: Example of geostrophic current reconstruction on 2023-08-31 with MIOST at a) global scale, b) view from Karin L3 products over the Agulhas region, c) from MIOST reconstruction integration 1SWOT and 6 nadirs, d) from MIOST reconstruction integration 6 nadirs and e) the difference in MIOST reconstructions between integration 1SWOT and 6 nadirs vs 6 nadirs only
+</p>
 
 The goal of the present data-challenge is:
 1) to investigate the contribution of SWOT KaRin data in global & regional mapping systems
