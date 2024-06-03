@@ -120,14 +120,14 @@ def plot_diff_stat_by_regimes(stat_output_filename_study, stat_output_filename_r
     my_dictionary = {}
     for region in ['coastal', 'offshore_highvar', 'offshore_lowvar', 'equatorial_band', 'arctic', 'antarctic']:
         my_dictionary[f'{region}'] = {}
-        for var_name in ['mapping_err', 'mapping_err_filtered',]:
+        for var_name in ['mapping_err', 'mapping_err_filtered']:
         
             ds_study = xr.open_dataset(stat_output_filename_study, group=f'{region}_{var_name}')
             ds_ref = xr.open_dataset(stat_output_filename_ref, group=f'{region}_{var_name}')
             
             diff = (ds_study - ds_ref)
             div = (ds_study - ds_ref)/ds_ref
-
+            
             my_dictionary[f'{region}'][f'Δ{var_name}_var [cm²]'] =  10000*diff['variance'].values[0]
             my_dictionary[f'{region}'][f'Δ{var_name}_var [%]'] =  100*div['variance'].values[0]
             #my_dictionary[f'{region}'][f'{var_name}_rms'] =  ds['rmse'].values[0]
@@ -888,14 +888,14 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     axs[0].set_title('SSH [All scale]')
     axs[0].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
-    p0.axes.gridlines(color='black', alpha=0., linestyle='--')
+    #p0.axes.gridlines(color='black', alpha=0., linestyle='--')
     # draw parallels/meridiens and write labels
     gl = p0.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                           linewidth=0.1, color='black', alpha=0.5, linestyle='--')
     # adjust labels to taste
     gl.xlabels_top = False
     gl.ylabels_right = False
-    gl.xlabels_bottom = False
+    #gl.xlabels_bottom = False
     gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
@@ -906,7 +906,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     axs[1].set_title('SSH [65-200km]')
     axs[1].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
-    p1.axes.gridlines(color='black', alpha=0., linestyle='--')
+    #p1.axes.gridlines(color='black', alpha=0., linestyle='--')
     # draw parallels/meridiens and write labels
     gl = p1.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                           linewidth=0.1, color='black', alpha=0.5, linestyle='--')
@@ -928,7 +928,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     axs[2].set_title('SSH [All scale]')
     axs[2].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
-    p2.axes.gridlines(color='black', alpha=0., linestyle='--')
+    #p2.axes.gridlines(color='black', alpha=0., linestyle='--')
     # draw parallels/meridiens and write labels
     gl = p2.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                           linewidth=0.1, color='black', alpha=0.5, linestyle='--')
@@ -953,7 +953,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     axs[3].set_title('SSH [65-200km]')
     axs[3].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
-    p3.axes.gridlines(color='black', alpha=0., linestyle='--')
+    #p3.axes.gridlines(color='black', alpha=0., linestyle='--')
     # draw parallels/meridiens and write labels
     gl = p3.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                           linewidth=0.1, color='black', alpha=0.5, linestyle='--')
@@ -975,7 +975,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     axs[4].set_title('SSH [All scale]')
     axs[4].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
-    p4.axes.gridlines(color='black', alpha=0., linestyle='--')
+    #p4.axes.gridlines(color='black', alpha=0., linestyle='--')
     # draw parallels/meridiens and write labels
     gl = p4.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                           linewidth=0.1, color='black', alpha=0.5, linestyle='--')
@@ -993,7 +993,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     axs[5].set_title('SSH [65-200km]')
     axs[5].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
-    p5.axes.gridlines(color='black', alpha=0., linestyle='--')
+    #p5.axes.gridlines(color='black', alpha=0., linestyle='--')
     # draw parallels/meridiens and write labels
     gl = p5.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                           linewidth=0.1, color='black', alpha=0.5, linestyle='--')
@@ -1019,7 +1019,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     axs[6].set_title('SSH [All scale]')
     axs[6].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
-    p6.axes.gridlines(color='black', alpha=0., linestyle='--')
+    #p6.axes.gridlines(color='black', alpha=0., linestyle='--')
     # draw parallels/meridiens and write labels
     gl = p6.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                           linewidth=0.1, color='black', alpha=0.5, linestyle='--')
@@ -1042,7 +1042,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     axs[7].set_title('SSH [65-200km]')
     axs[7].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
-    p7.axes.gridlines(color='black', alpha=0., linestyle='--')
+    # p7.axes.gridlines(color='black', alpha=0., linestyle='--')
     # draw parallels/meridiens and write labels
     gl = p7.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
                           linewidth=0.1, color='black', alpha=0.5, linestyle='--')
@@ -1344,7 +1344,7 @@ def compare_psd_score_png(study_filename, ref_filename):
     vmin = 100.
     vmax= 500.
     p0 = axs[0].pcolormesh(ds_ref.lon, ds_ref.lat, ds_ref.effective_resolution, vmin=vmin, vmax=vmax, cmap='Spectral_r')
-    axs[0].set_title('SSH ')
+    axs[0].set_title('Effective resolution')
     axs[0].coastlines(resolution='10m', lw=0.5, zorder=13)
     axs[0].add_feature(cfeature.LAND, color='w', zorder=12)
     # optional add grid lines
