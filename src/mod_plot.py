@@ -31,7 +31,7 @@ def plot_stat_score_map(filename):
                                                               clim=(0, 0.002),
                                                               cmap='Reds',
                                                               rasterize=True,
-                                                              title='Error variance [65:500km]')
+                                                              title='Error variance [65:200km]')
     
     fig3 = (1 - ds_binning_allscale['variance_mapping_err']/ds_binning_allscale['variance_track']).hvplot.quadmesh(x='lon',
                                                               y='lat',
@@ -45,7 +45,7 @@ def plot_stat_score_map(filename):
                                                               clim=(0, 1),
                                                               cmap='RdYlGn',
                                                               rasterize=True,
-                                                              title='Explained variance [65:500km]')
+                                                              title='Explained variance [65:200km]')
     
 #     fig5 = ds_binning_allscale['rmse'].hvplot.quadmesh(x='lon',
 #                                                               y='lat',
@@ -59,7 +59,7 @@ def plot_stat_score_map(filename):
 #                                                               clim=(0, 0.1),
 #                                                               cmap='Reds',
 #                                                               rasterize=True,
-#                                                               title='RMSE [65:500km]')
+#                                                               title='RMSE [65:200km]')
     
     return (fig1 + fig2 + fig3 + fig4).cols(2)
 
@@ -115,6 +115,28 @@ def plot_stat_by_regimes(stat_output_filename):
     
     return pd.DataFrame(my_dictionary.values(), index=my_dictionary.keys())
 
+
+def plot_diff_stat_by_regimes(stat_output_filename_study, stat_output_filename_ref):
+    my_dictionary = {}
+    for region in ['coastal', 'offshore_highvar', 'offshore_lowvar', 'equatorial_band', 'arctic', 'antarctic']:
+        my_dictionary[f'{region}'] = {}
+        for var_name in ['mapping_err', 'mapping_err_filtered',]:
+        
+            ds_study = xr.open_dataset(stat_output_filename_study, group=f'{region}_{var_name}')
+            ds_ref = xr.open_dataset(stat_output_filename_ref, group=f'{region}_{var_name}')
+            
+            diff = (ds_study - ds_ref)
+            div = (ds_study - ds_ref)/ds_ref
+
+            my_dictionary[f'{region}'][f'Δ{var_name}_var [cm²]'] =  10000*diff['variance'].values[0]
+            my_dictionary[f'{region}'][f'Δ{var_name}_var [%]'] =  100*div['variance'].values[0]
+            #my_dictionary[f'{region}'][f'{var_name}_rms'] =  ds['rmse'].values[0]
+    
+    # for region in ['coastal', 'offshore_highvar', 'offshore_lowvar', 'equatorial_band', 'arctic', 'antarctic']:
+    #     my_dictionary[region]['var_score_allscale'] = 1. - my_dictionary[region]['mapping_err_var [m²]']/my_dictionary[region]['sla_unfiltered_var [m²]']
+    #     my_dictionary[region]['var_score_filtered'] = 1. - my_dictionary[region]['mapping_err_filtered_var [m²]']/my_dictionary[region]['sla_filtered_var [m²]']
+    
+    return pd.DataFrame(my_dictionary.values(), index=my_dictionary.keys())
 
 
 def plot_stat_uv_by_regimes(stat_output_filename):
@@ -346,7 +368,7 @@ def plot_stat_score_map_uv(filename):
 #                                                               clim=(0, 0.1),
 #                                                               cmap='Reds',
 #                                                               rasterize=True,
-#                                                               title='RMSE [65:500km]')
+#                                                               title='RMSE [65:200km]')
     
     return (fig1 + fig2 + fig3 + fig4).cols(2)
 
@@ -680,7 +702,7 @@ def plot_stat_score_map_png(filename):
     gl.ylabel_style = {'size': 10, 'color': 'black'}
     
     p1 = axs[1].pcolormesh(ds_binning_filtered.lon, ds_binning_filtered.lat, ds_binning_filtered.variance_mapping_err, vmin=vmin, vmax=vmax, cmap='Reds')
-    axs[1].set_title('SSH [65-500km]')
+    axs[1].set_title('SSH [65-200km]')
     axs[1].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
     p1.axes.gridlines(color='black', alpha=0., linestyle='--')
@@ -719,7 +741,7 @@ def plot_stat_score_map_png(filename):
     
     
     p3 = axs[3].pcolormesh(ds_binning_allscale.lon, ds_binning_allscale.lat, (1 - ds_binning_filtered['variance_mapping_err']/ds_binning_filtered['variance_track']), vmin=vmin, vmax=vmax, cmap='RdYlGn')
-    axs[3].set_title('SSH [65-500km]')
+    axs[3].set_title('SSH [65-200km]')
     axs[3].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
     p3.axes.gridlines(color='black', alpha=0., linestyle='--')
@@ -777,7 +799,7 @@ def compare_stat_score_map(study_filename, ref_filename):
                                                               clim=(0, 0.002),
                                                               cmap='Reds',
                                                               rasterize=True,
-                                                              title='Reference Error variance [65:500km]')
+                                                              title='Reference Error variance [65:200km]')
     
     fig3 = (100*(ds_study_binning_allscale['variance_mapping_err'] - ds_ref_binning_allscale['variance_mapping_err'])/ds_ref_binning_allscale['variance_mapping_err']).hvplot.quadmesh(x='lon',
                                                               y='lat',
@@ -791,7 +813,7 @@ def compare_stat_score_map(study_filename, ref_filename):
                                                               clim=(-20, 20),
                                                               cmap='coolwarm',
                                                               rasterize=True,
-                                                              title='Reference Error variance [65:500km]')
+                                                              title='Reference Error variance [65:200km]')
     
     fig5 = explained_variance_ref_all_scale.hvplot.quadmesh(x='lon',
                                                               y='lat',
@@ -805,7 +827,7 @@ def compare_stat_score_map(study_filename, ref_filename):
                                                               clim=(0, 1),
                                                               cmap='RdYlGn',
                                                               rasterize=True,
-                                                              title='Reference Explained variance [65:500km]')
+                                                              title='Reference Explained variance [65:200km]')
     
     fig7 = (explained_variance_study_all_scale - explained_variance_ref_all_scale).hvplot.quadmesh(x='lon',
                                                               y='lat',
@@ -819,7 +841,7 @@ def compare_stat_score_map(study_filename, ref_filename):
                                                               clim=(-0.2, 0.2),
                                                               cmap='coolwarm_r',
                                                               rasterize=True,
-                                                              title='Gain(+)/Loss(-) Explained variance [65:500km]')
+                                                              title='Gain(+)/Loss(-) Explained variance [65:200km]')
     
 #     fig5 = ds_binning_allscale['rmse'].hvplot.quadmesh(x='lon',
 #                                                               y='lat',
@@ -833,7 +855,7 @@ def compare_stat_score_map(study_filename, ref_filename):
 #                                                               clim=(0, 0.1),
 #                                                               cmap='Reds',
 #                                                               rasterize=True,
-#                                                               title='RMSE [65:500km]')
+#                                                               title='RMSE [65:200km]')
     
     return (fig1 + fig2 + fig3 + fig4 + fig5 + fig6 +fig7 +fig8).cols(2)
 
@@ -856,7 +878,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     
     fig, axs = plt.subplots(nrows=4,ncols=2,
                         subplot_kw={'projection': ccrs.PlateCarree()},
-                        figsize=(11,15))
+                        figsize=(11,18))
 
     axs=axs.flatten()
     
@@ -881,7 +903,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     gl.ylabel_style = {'size': 10, 'color': 'black'}
     
     p1 = axs[1].pcolormesh(ds_ref_binning_filtered.lon, ds_ref_binning_filtered.lat, ds_ref_binning_filtered.variance_mapping_err, vmin=vmin, vmax=vmax, cmap='Reds')
-    axs[1].set_title('SSH [65-500km]')
+    axs[1].set_title('SSH [65-200km]')
     axs[1].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
     p1.axes.gridlines(color='black', alpha=0., linestyle='--')
@@ -892,12 +914,13 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     gl.xlabels_top = False
     gl.ylabels_right = False
     gl.ylabels_left = False
-    gl.xlabels_bottom = False
+    #gl.xlabels_bottom = False
     gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
     gl.xlabel_style = {'size': 10, 'color': 'black'}
     gl.ylabel_style = {'size': 10, 'color': 'black'}
+    
     
     vmin = -20.
     vmax= 20
@@ -917,6 +940,8 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     gl.yformatter = LATITUDE_FORMATTER
     gl.xlabel_style = {'size': 10, 'color': 'black'}
     gl.ylabel_style = {'size': 10, 'color': 'black'}
+    gl.xlabels_top = False
+    gl.ylabels_right = False
     
     
     p3 = axs[3].pcolormesh(ds_study_binning_filtered.lon, 
@@ -925,7 +950,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
                            vmin=vmin, 
                            vmax=vmax, 
                            cmap='coolwarm')
-    axs[3].set_title('SSH [65-500km]')
+    axs[3].set_title('SSH [65-200km]')
     axs[3].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
     p3.axes.gridlines(color='black', alpha=0., linestyle='--')
@@ -957,7 +982,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     # adjust labels to taste
     gl.xlabels_top = False
     gl.ylabels_right = False
-    gl.xlabels_bottom = False
+    #gl.xlabels_bottom = False
     gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
@@ -965,7 +990,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     gl.ylabel_style = {'size': 10, 'color': 'black'}
     
     p5 = axs[5].pcolormesh(ds_ref_binning_filtered.lon, ds_ref_binning_filtered.lat, explained_variance_ref_filtered, vmin=vmin, vmax=vmax, cmap='RdYlGn')
-    axs[5].set_title('SSH [65-500km]')
+    axs[5].set_title('SSH [65-200km]')
     axs[5].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
     p5.axes.gridlines(color='black', alpha=0., linestyle='--')
@@ -976,7 +1001,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     gl.xlabels_top = False
     gl.ylabels_right = False
     gl.ylabels_left = False
-    gl.xlabels_bottom = False
+    #gl.xlabels_bottom = False
     gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
@@ -1014,7 +1039,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
                            vmin=vmin, 
                            vmax=vmax, 
                            cmap='coolwarm_r')
-    axs[7].set_title('SSH [65-500km]')
+    axs[7].set_title('SSH [65-200km]')
     axs[7].coastlines(resolution='10m', lw=0.5)
     # optional add grid lines
     p7.axes.gridlines(color='black', alpha=0., linestyle='--')
@@ -1035,19 +1060,19 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     
     
     
-    cax = fig.add_axes([0.92, 0.57, 0.02, 0.13])
+    cax = fig.add_axes([0.95, 0.57, 0.02, 0.13])
     fig.colorbar(p3, cax=cax, orientation='vertical')
     cax.set_ylabel('Loss(-)/Gain(+)\n Error variance [%]', fontweight='bold')
     
-    cax = fig.add_axes([0.92, 0.75, 0.02, 0.13])
+    cax = fig.add_axes([0.95, 0.75, 0.02, 0.13])
     cbar = fig.colorbar(p1, cax=cax, orientation='vertical')
     cax.set_ylabel('Error variance [m$^2$]', fontweight='bold')
     
-    cax = fig.add_axes([0.92, 0.22, 0.02, 0.13])
+    cax = fig.add_axes([0.95, 0.22, 0.02, 0.13])
     fig.colorbar(p7, cax=cax, orientation='vertical')
     cax.set_ylabel('Loss(-)/Gain(+)\n Explained variance', fontweight='bold')
     
-    cax = fig.add_axes([0.92, 0.4, 0.02, 0.13])
+    cax = fig.add_axes([0.95, 0.4, 0.02, 0.13])
     cbar = fig.colorbar(p5, cax=cax, orientation='vertical')
     cax.set_ylabel('Explained variance', fontweight='bold')
     
@@ -1312,7 +1337,7 @@ def compare_psd_score_png(study_filename, ref_filename):
     
     fig, axs = plt.subplots(nrows=3,ncols=1,
                         subplot_kw={'projection': ccrs.PlateCarree()},
-                        figsize=(6,10))
+                        figsize=(6,12))
 
     axs=axs.flatten()
     
@@ -1351,7 +1376,7 @@ def compare_psd_score_png(study_filename, ref_filename):
     # adjust labels to taste
     gl.xlabels_top = False
     gl.ylabels_right = False
-    gl.ylabels_left = True
+    gl.ylabels_left = False
     gl.xlabels_bottom = False
     gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
     gl.xformatter = LONGITUDE_FORMATTER
@@ -1379,14 +1404,14 @@ def compare_psd_score_png(study_filename, ref_filename):
     gl.xlabel_style = {'size': 10, 'color': 'black'}
     gl.ylabel_style = {'size': 10, 'color': 'black'}
     
-    cax = fig.add_axes([0.92, 0.12, 0.02, 0.2])
+    cax = fig.add_axes([0.95, 0.12, 0.02, 0.2])
     fig.colorbar(p2, cax=cax, orientation='vertical')
     cax.set_ylabel('Gain(-)/Loss(+)\n Effective resolution [%]', fontweight='bold')
     
-    cax = fig.add_axes([0.92, 0.4, 0.02, 0.2])
+    cax = fig.add_axes([0.95, 0.4, 0.02, 0.2])
     cbar = fig.colorbar(p1, cax=cax, orientation='vertical')
     cax.set_ylabel('Gain(-)/Loss(+)\n Effective resolution [km]', fontweight='bold')
     
-    cax = fig.add_axes([0.92, 0.67, 0.02, 0.2])
+    cax = fig.add_axes([0.95, 0.67, 0.02, 0.2])
     fig.colorbar(p0, cax=cax, orientation='vertical')
     cax.set_ylabel('Efective resolition [km]', fontweight='bold')

@@ -159,9 +159,12 @@ def compute_stat_scores(ds_interp, lambda_min, lambda_max, output_file):
        
 def compute_stat_scores_by_regimes(ds_interp, output_file): 
     
-    distance_to_nearest_coast = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/distance_to_nearest_coastline_60.nc'
-    land_sea_mask = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/land_water_mask_60.nc'
-    variance_ssh = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/variance_cmems_dt_allsat.nc'
+    # distance_to_nearest_coast = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/distance_to_nearest_coastline_60.nc'
+    # land_sea_mask = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/land_water_mask_60.nc'
+    # variance_ssh = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/variance_cmems_dt_allsat.nc'
+    distance_to_nearest_coast = '../data/sad/distance_to_nearest_coastline_60.nc'
+    land_sea_mask = '../data/sad/land_water_mask_60.nc'
+    variance_ssh = '../data/sad/variance_cmems_dt_allsat.nc'
     variance_criteria = 0.02             # min variance contour in m**2 to define the high variability regions
     coastal_distance_criteria = 200.     # max distance to coast in km to define the coastal regions
     
@@ -207,8 +210,11 @@ def compute_stat_scores_by_regimes(ds_interp, output_file):
     msk_lowvar_data = np.ma.masked_where(variance_interp <= variance_criteria, variance_interp).mask
     msk_highvar_data = np.ma.masked_where(variance_interp >= variance_criteria, variance_interp).mask
     msk_extra_equatorial_band = np.ma.masked_where(np.abs(lat_vector) > 10, lat_vector).mask
-    msk_arctic = np.ma.masked_where(lat_vector < 70., lat_vector).mask
-    msk_antarctic = np.ma.masked_where(lat_vector > -70., lat_vector).mask
+    msk_equatorial_band = np.ma.masked_where(np.abs(lat_vector) < 10, lat_vector).mask
+    msk_below_arctic = np.ma.masked_where(lat_vector < 70., lat_vector).mask
+    msk_above_antarctic = np.ma.masked_where(lat_vector > -70., lat_vector).mask
+    msk_arctic = np.ma.masked_where(lat_vector > 70., lat_vector).mask
+    msk_antarctic = np.ma.masked_where(lat_vector < -70., lat_vector).mask
     
     for var_name in ['mapping_err', 'msla_interpolated', 'sla_unfiltered', 'mapping_err_filtered', 'msla_filtered', 'sla_filtered']:
         data_vector = ds_interp[var_name].values
@@ -227,8 +233,8 @@ def compute_stat_scores_by_regimes(ds_interp, output_file):
             coastal_analysis = [0, [np.nan, np.nan], np.nan, np.nan, np.nan, np.nan,]
             coastal_rmse = np.nan
     
-        # distance >= 200km & variance >= 0.02
-        msk = msk_land_data + msk_coastal_data + msk_lowvar_data
+        # distance >= 200km & variance >= 0.02 & extra equatorial
+        msk = msk_land_data + msk_coastal_data + msk_lowvar_data + msk_equatorial_band + msk_arctic + msk_antarctic
         data_vector_selected = np.ma.masked_where(msk, data_vector).compressed()
         if data_vector_selected.size > 0:
             offshore_highvar_analysis = stats.describe(data_vector_selected, nan_policy='omit')
@@ -241,8 +247,8 @@ def compute_stat_scores_by_regimes(ds_interp, output_file):
             offshore_highvar_analysis = [0, [np.nan, np.nan], np.nan, np.nan, np.nan, np.nan,]
             offshore_highvar_rmse = np.nan
     
-        # distance >= 200km & variance <= 0.02
-        msk = msk_land_data + msk_coastal_data + msk_highvar_data
+        # distance >= 200km & variance <= 0.02 & extra equatorial
+        msk = msk_land_data + msk_coastal_data + msk_highvar_data + msk_equatorial_band + msk_arctic + msk_antarctic
         data_vector_selected = np.ma.masked_where(msk, data_vector).compressed()
         if data_vector_selected.size > 0:
             offshore_lowvar_analysis = stats.describe(data_vector_selected, nan_policy='omit')
@@ -255,8 +261,8 @@ def compute_stat_scores_by_regimes(ds_interp, output_file):
             offshore_lowvar_analysis = [0, [np.nan, np.nan], np.nan, np.nan, np.nan, np.nan,]
             offshore_lowvar_rmse = np.nan
     
-        # Equatorial band
-        msk = msk_land_data + msk_extra_equatorial_band
+        # Equatorial band & distance >= 200km
+        msk = msk_land_data + msk_extra_equatorial_band + msk_coastal_data  + msk_arctic + msk_antarctic
         data_vector_selected = np.ma.masked_where(msk, data_vector).compressed()
         if data_vector_selected.size > 0:
             equatorial_analysis = stats.describe(data_vector_selected, nan_policy='omit')
@@ -266,7 +272,7 @@ def compute_stat_scores_by_regimes(ds_interp, output_file):
             equatorial_rmse = np.nan
     
         # Arctic
-        msk = msk_land_data + msk_arctic
+        msk = msk_land_data + msk_below_arctic
         data_vector_selected = np.ma.masked_where(msk, data_vector).compressed()
         if data_vector_selected.size > 0:
             arctic_analysis = stats.describe(data_vector_selected, nan_policy='omit')
@@ -276,7 +282,7 @@ def compute_stat_scores_by_regimes(ds_interp, output_file):
             arctic_rmse = np.nan
         
         # AntArctic
-        msk = msk_land_data + msk_antarctic
+        msk = msk_land_data + msk_above_antarctic
         data_vector_selected = np.ma.masked_where(msk, data_vector).compressed()
         if data_vector_selected.size > 0:
             antarctic_analysis = stats.describe(data_vector_selected, nan_policy='omit')
@@ -516,9 +522,12 @@ def bin_data_uv(ds, output_file, lon_out=np.arange(0, 360, 1), lat_out=np.arange
     
 def compute_stat_scores_uv_by_regimes(ds_interp, output_file): 
     
-    distance_to_nearest_coast = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/distance_to_nearest_coastline_60.nc'
-    land_sea_mask = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/land_water_mask_60.nc'
-    variance_ssh = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/variance_cmems_dt_allsat.nc'
+    # distance_to_nearest_coast = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/distance_to_nearest_coastline_60.nc'
+    # land_sea_mask = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/land_water_mask_60.nc'
+    # variance_ssh = '/home/ad/ballarm/data/wisa/data_challenge_ose//data/sad/variance_cmems_dt_allsat.nc'
+    distance_to_nearest_coast = '../data/sad/distance_to_nearest_coastline_60.nc'
+    land_sea_mask = '../data/wisa/data_challenge_ose//data/sad/land_water_mask_60.nc'
+    variance_ssh = '../data/wisa/data_challenge_ose//data/sad/variance_cmems_dt_allsat.nc'
     variance_criteria = 0.02             # min variance contour in m**2 to define the high variability regions
     coastal_distance_criteria = 200.     # max distance to coast in km to define the coastal regions
     
