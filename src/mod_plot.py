@@ -878,7 +878,7 @@ def compare_stat_score_map_png(study_filename, ref_filename):
     
     fig, axs = plt.subplots(nrows=4,ncols=2,
                         subplot_kw={'projection': ccrs.PlateCarree()},
-                        figsize=(11,18))
+                        figsize=(11,16))
 
     axs=axs.flatten()
     
@@ -1337,7 +1337,7 @@ def compare_psd_score_png(study_filename, ref_filename):
     
     fig, axs = plt.subplots(nrows=3,ncols=1,
                         subplot_kw={'projection': ccrs.PlateCarree()},
-                        figsize=(6,12))
+                        figsize=(6,10))
 
     axs=axs.flatten()
     
@@ -1365,7 +1365,7 @@ def compare_psd_score_png(study_filename, ref_filename):
     vmin = -40.
     vmax= 40.
     p1 = axs[1].pcolormesh(ds_ref.lon, ds_ref.lat, ds_study.effective_resolution - ds_ref.effective_resolution, vmin=vmin, vmax=vmax, cmap='coolwarm')
-    axs[1].set_title('SSH')
+    axs[1].set_title('Gain(-)/Loss(+) Effective resolution ([km])')
     axs[1].coastlines(resolution='10m', lw=0.5, zorder=13)
     axs[1].add_feature(cfeature.LAND, color='w', zorder=12)
     # optional add grid lines
@@ -1387,7 +1387,7 @@ def compare_psd_score_png(study_filename, ref_filename):
     vmin = -10.
     vmax= 10
     p2 = axs[2].pcolormesh(ds_ref.lon, ds_ref.lat, 100*(ds_study.effective_resolution - ds_ref.effective_resolution)/ds_ref.effective_resolution, vmin=vmin, vmax=vmax, cmap='coolwarm')
-    axs[2].set_title('SSH')
+    axs[2].set_title('Gain(-)/Loss(+) Effective resolution ([%])')
     axs[2].coastlines(resolution='10m', lw=0.5, zorder=13)
     axs[2].add_feature(cfeature.LAND, color='w', zorder=12)
     # optional add grid lines
