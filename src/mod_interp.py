@@ -37,14 +37,26 @@ class TimeSeries:
         return series, timedelta(seconds=float(frequency.pop()))
 
     def load_dataset(self, varname, start, end):
-        """Loading the time series into memory for the defined period.
-        Args:
-            varname (str): Name of the variable to be loaded into memory.
-            start (datetime.datetime): Date of the first map to be loaded.
-            end (datetime.datetime): Date of the last map to be loaded.
-        Returns:
-            pyinterp.backends.xarray.Grid3D: The interpolator handling the
-            interpolation of the grid series.
+        """
+        Load the time series into memory for the defined period.
+
+        Parameters
+        ----------
+        varname : str
+            Name of the variable to be loaded into memory.
+        start : datetime.datetime
+            Date of the first map to be loaded.
+        end : datetime.datetime
+            Date of the last map to be loaded.
+
+        Returns
+        -------
+        pyinterp.backends.xarray.Grid3D
+            The interpolator handling the interpolation of the grid series.
+
+        Examples
+        --------
+        >>> interpolator = instance.load_dataset('temperature', datetime.datetime(2020, 1, 1), datetime.datetime(2020, 12, 31))
         """
         if start < self.series.min():
             start = self.series.min()

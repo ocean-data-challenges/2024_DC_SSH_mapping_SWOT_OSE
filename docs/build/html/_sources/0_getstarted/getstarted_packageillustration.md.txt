@@ -1,0 +1,12 @@
+# Metric package illustration
+
+<br> 
+
+<br>  
+
+[Run spectrum notebook](../_static/nb_illustration_run-spectum.ipynb)
+  
+ 
+ 
+
+[installed the data challenge](getstarted_install.md)
