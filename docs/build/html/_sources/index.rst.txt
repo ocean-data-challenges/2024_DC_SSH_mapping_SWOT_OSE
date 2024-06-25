@@ -92,7 +92,7 @@ In addition to the nadir altimetry constellation previously mentioned, we conduc
         </p>
         <p align="center">
         <i>
-        Figure: Spatial sampling of a) 3 nadirs altimeters, b) 7 nadirs altimeters and c) 1 SWOT
+        Figure: Example of spatial sampling in the North Atlantic of a) 3 nadirs altimeters, b) 7 nadirs altimeters and c) 1 SWOT
         </i>
         </p>
         </br>
@@ -155,7 +155,7 @@ If you are interested in more data challenges relating to oceanographic data (gl
         
         <br />
         
-        <center> <img src="_static/logos_partenaires_DC_WOC-ESA.jpg" alt="Alt Text" width="1200"/></center>
+        <center> <img src="_static/logos_partenaires_DC_mapping_SSH_SWOT.jpg" alt="Alt Text" width="1000"/></center>
         
         
         
