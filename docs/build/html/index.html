@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Observations &#8212; SSH SWOT mapping data challenge  documentation</title>
+    <title>Data sequence and use &#8212; SSH SWOT mapping data challenge  documentation</title>
   
   
   
@@ -425,15 +425,30 @@ The practical goal of the challenge is to investigate the contribution of SWOT K
 
     </br>
 
-</embed><section id="observations">
-<h1>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">#</a></h1>
-<section id="nadirs-sea-level-anomaly-level-3-products">
-<h2>Nadirs sea-level anomaly Level 3 products<a class="headerlink" href="#nadirs-sea-level-anomaly-level-3-products" title="Permalink to this headline">#</a></h2>
-<p>To produce the gridded sea level maps, we used the global ocean sea level anomaly observations from the Near-Real-Time (NRT) Level-3 altimeter satellite along-track data distributed by the EU Copernicus Marine Service (product reference [SEALEVEL_GLO_PHY_L3_NRT_008_044](<a class="reference external" href="https://data.marine.copernicus.eu/product/SEALEVEL_GLO_PHY_L3_NRT_008_044/description">https://data.marine.copernicus.eu/product/SEALEVEL_GLO_PHY_L3_NRT_008_044/description</a>)), specifically for the Jason-3, Sentinel-3A, Sentinel-3B, Sentinel-6A, SARAL-Altika, Cryosat-2, Haiyang-2B, missions. This dataset covers the global ocean and is available at a sampling rate of 1 Hz (approximately 7 km spatial spacing).</p>
-</section>
-<section id="swot-sea-level-anomaly-level-3-products">
-<h2>SWOT sea-level anomaly Level 3 products<a class="headerlink" href="#swot-sea-level-anomaly-level-3-products" title="Permalink to this headline">#</a></h2>
-<p>In addition to the nadir altimetry constellation previously mentioned, we conducted experiments involving the integration of SWOT Level-3 Ocean product (specifically referencing [SWOT_L3_SSH](<a class="reference external" href="https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/swot-l3-ocean-products.html">https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/swot-l3-ocean-products.html</a>)) during the 21-day phase of the mission. The SWOT_L3_SSH product combines ocean topography measurements collected from both the SWOT KaRIn and nadir altimeter instruments, consolidating them into a unified variable on a 2 km spatial grid spacing. For our investigation, we used version 0.3 &amp; version 1.0 of the product accessible through the AVISO+ portal (AVISO/DUACS, 2023). These data were derived from the Level-2 “Beta Pre-validated” KaRIn Low Rate (Ocean) product (NASA/JPL and CNES).</p>
+</embed><section id="data-sequence-and-use">
+<h1>Data sequence and use<a class="headerlink" href="#data-sequence-and-use" title="Permalink to this headline">#</a></h1>
+<p>The SSH reconstructions are assessed at global scale and over the period from 2023-08-01 to 2024-05-01.
+The SSH reconstructions can also be assessed at regional scale and over the same period from 2023-08-01 to 2024-05-01.</p>
+<p>For reconstruction methods that need a spin-up, the <strong>observations</strong> from other period can be used.</p>
+<p>The altimeter data from Saral/AltiKa data described below should never be used so that any reconstruction can be considered uncorrelated to the evaluation period.</p>
+<embed>
+    </br>
+
+    </hr>
+
+    </br>
+
+</embed></section>
+<section id="mapping-observations">
+<h1>Mapping observations<a class="headerlink" href="#mapping-observations" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p><strong>Nadirs sea-level anomaly Level 3 products</strong></p></li>
+</ul>
+<p>To produce the gridded sea level maps, the global ocean sea level anomaly observations from the Near-Real-Time (NRT) Level-3 altimeter satellite along-track data can be used. These data are distributed by the EU Copernicus Marine Service (product reference <a class="reference external" href="https://data.marine.copernicus.eu/product/SEALEVEL_GLO_PHY_L3_NRT_008_044/description">SEALEVEL_GLO_PHY_L3_NRT_08_044</a>), specifically for the Jason-3, Sentinel-3A, Sentinel-3B, Sentinel-6A, Cryosat-2, Haiyang-2B, missions. The SWOT nadir, distributed on the AVISO+ portal (AVISO/DUACS, 2023), can also be used to produce the gridded sea level maps.  This dataset covers the global ocean and is available at a sampling rate of 1 Hz (approximately 7 km spatial spacing).</p>
+<ul class="simple">
+<li><p><strong>SWOT sea-level anomaly Level 3 products</strong></p></li>
+</ul>
+<p>In addition to the nadir altimetry constellation previously mentioned, we conducted experiments involving the integration of SWOT Level-3 Ocean product (specifically referencing <a class="reference external" href="https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/swot-l3-ocean-products.html">SWOT_L3_SSH</a>) during the 21-day phase of the mission. The SWOT_L3_SSH product combines ocean topography measurements collected from both the SWOT KaRIn and nadir altimeter instruments, consolidating them into a unified variable on a 2 km spatial grid spacing. For our investigation, we used version 0.3 &amp; version 1.0 of the product accessible through the AVISO+ portal (AVISO/DUACS, 2023). These data were derived from the Level-2 “Beta Pre-validated” KaRIn Low Rate (Ocean) product (NASA/JPL and CNES).</p>
 <embed>
     <p align="center">
       <img src="_static/sampling.png" alt="Alt Text" width="1000"/>
@@ -449,13 +464,16 @@ The practical goal of the challenge is to investigate the contribution of SWOT K
 
     </br>
 </embed></section>
-</section>
-<section id="data-sequence-and-use">
-<h1>Data sequence and use<a class="headerlink" href="#data-sequence-and-use" title="Permalink to this headline">#</a></h1>
-<p>The SSH reconstructions are assessed at global scale and over the period from 2023-08-01 to 2024-05-01.
-The SSH reconstructions can also be assessed at regional scale and over the same period from 2023-08-01 to 2024-05-01.</p>
-<p>For reconstruction methods that need a spin-up, the <strong>observations</strong> from other period can be used.</p>
-<p>The altimeter data from Saral/AltiKa data mentioned above should never be used so that any reconstruction can be considered uncorrelated to the evaluation period.</p>
+<section id="evaluation-observations">
+<h1>Evaluation observations<a class="headerlink" href="#evaluation-observations" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p><strong>Independent nadir sea-level anomaly Level 3 product: Saral-Altika</strong></p></li>
+</ul>
+<p>To evaluate the gridded sea level maps, the Near-Real-Time (NRT) Level-3 altimeter satellite along-track data at a sampling rate of 1 Hz (approximately 7 km spatial spacing) from the Saral-Altika mission can be used. The Saral-Altika sea level data are also distributed by the EU Copernicus Marine Service (product reference <a class="reference external" href="https://data.marine.copernicus.eu/product/SEALEVEL_GLO_PHY_L3_NRT_008_044/description">SEALEVEL_GLO_PHY_L3_NRT_008_044</a>).</p>
+<ul class="simple">
+<li><p><strong>Independent drifter 15m-depth current and trajectories</strong></p></li>
+</ul>
+<p>The geostrophic current derived from the gridded sea level reconstructed maps can be evaluated using in situ drifter data, which are also distributed by CMEMS <a class="reference external" href="https://doi.org/10.17882/86236">https://doi.org/10.17882/86236</a>. From these data the 15m depth current measured by the drifters and the trajectory of the drifters can be used compared to the evaluate the reconstructed geostrophic current maps.</p>
 <embed>
     </br>
 
@@ -464,8 +482,8 @@ The SSH reconstructions can also be assessed at regional scale and over the same
     </br>
 
 </embed></section>
-<section id="more-data-challenges">
-<h1>More data challenges<a class="headerlink" href="#more-data-challenges" title="Permalink to this headline">#</a></h1>
+<section id="for-more-data-challenges">
+<h1>For more data challenges<a class="headerlink" href="#for-more-data-challenges" title="Permalink to this headline">#</a></h1>
 <p>If you are interested in more data challenges relating to oceanographic data (global altimetric mapping, SWOT preprocessing techniques …), you can visit the ocean-data-challenges website.</p>
 <embed>
 

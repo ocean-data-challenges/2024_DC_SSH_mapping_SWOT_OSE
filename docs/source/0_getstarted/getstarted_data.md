@@ -18,30 +18,86 @@ The dataset is presented with the following directory structure:
 
 --- 
 
-## 1) Data for experiment
+## Data description
+
+### 1) Data for experiment
 
 **Nadir alongtrack data (L3 products) for SSH map reconstruction**
+ 
+```
+.
+|-- nadirs
+|   |-- c2n		% NRT Cryosat-2 new orbit Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
+|   |   |-- 2023
+|   |   |   |-- nrt_global_c2n_phy_l3_1hz_2023*.nc
+|   |   |-- 2024
+|   |   |   |-- nrt_global_c2n_phy_l3_1hz_2024*.nc
+|   |-- h2b		% NRT Haiyang-2B Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
+|   |   |-- 2023
+|   |   |   |-- nrt_global_h2b_phy_l3_1hz_2023*.nc
+|   |   |-- 2024
+|   |   |   |-- nrt_global_h2b_phy_l3_1hz_2024*.nc
+|   |-- j3n		% NRT Jason-3 Interleaved Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
+|   |   |-- 2023
+|   |   |   |-- nrt_global_j3n_phy_l3_1hz_2023*.nc
+|   |   |-- 2024
+|   |   |   |-- nrt_global_j3n_phy_l3_1hz_2024*.nc
+|   |-- s3a		% NRT Sentinel-3A Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
+|   |   |-- 2023
+|   |   |   |-- nrt_global_s3a_phy_l3_1hz_2023*.nc
+|   |   |-- 2024
+|   |   |   |-- nrt_global_s3a_phy_l3_1hz_2024*.nc
+|   |-- s3b		% NRT Sentinel-3B Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
+|   |   |-- 2023
+|   |   |   |-- nrt_global_s3b_phy_l3_1hz_2023*.nc
+|   |   |-- 2024
+|   |   |   |-- nrt_global_s3b_phy_l3_1hz_2024*.nc
+|   |-- s6a_hr		% NRT Sentinel-6A (SAR mode) Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
+|   |   |-- 2023
+|   |   |   |-- nrt_global_s6a_hr_phy_l3_1hz_2023*.nc
+|   |   |-- 2024
+|   |   |   |-- nrt_global_s6a_hr_phy_l3_1hz_2024*.nc
+|   |-- swon		%  NRT SWOT nadir 28days Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
+|   |   |-- 2023
+|   |   |   |-- nrt_global_swo_hr_phy_l3_1hz_2023*.nc
+|   |   |-- 2024
+|   |   |   |-- nrt_global_swo_hr_phy_l3_1hz_2024*.nc
+``` 
+
+
+**SWOT Karin data (L3 products) for SSH map reconstruction**
 
 ```
 .
-|-- alongtrack
+|-- karin
 ``` 
 
 --- 
 
-## 2) Data for evaluation
+### 2) Data for evaluation
 
 **Independant nadir alongtrack data (L3 products) for SSH evaluation**
 
 ```
 .
-|-- independant_alongtrack
-|   |-- al		% DT Altika Drifting Phase Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
+|-- indep_nadir
+|   |-- al		% NRT Altika Drifting Phase Global Ocean Along track SSALTO/DUACS Sea Surface Height L3 product
 |   |   |-- 2023
 |   |   |   |-- nrt_global_al_phy_l3_1hz_2023*.nc
 |   |   |-- 2024
 |   |   |   |-- nrt_global_al_phy_l3_1hz_2024*.nc
+
 ```
+
+
+**Independant drifter data (L3 products) for geostrophic current evaluation**
+
+```
+.
+|-- indep_drifters 
+
+```
+
 
 **Auxiliary data for diagnostics**
 
@@ -56,7 +112,7 @@ The dataset is presented with the following directory structure:
 
 --- 
 
-## 3) Data for comparison
+### 3) Data for comparison
 
 **Reconstruction maps for comparison**
 
@@ -72,10 +128,13 @@ The dataset is presented with the following directory structure:
 --- 
 
 
-## Download the data
+## Downloading the data
 
-The data can be downloaded locally using the wget command. We recommand that the data be stored in the `data/` repository. 
-For example, to download and unzip the experiment alongtrack data:
+The data can be downloaded locally directly from your browser by clicking here: [Download](https://ige-meom-opendap.univ-grenoble-alpes.fr/thredds/catalog/meomopendap/extract/MEOM/OCEAN_DATA_CHALLENGES/2024_DC_SSH_mapping_SWOT_OSE/catalog.html)
+
+</br>
+
+or by using the wget command, for example, to download and unzip the experiment alongtrack data: 
 
 ``` 
 cd data/
@@ -84,4 +143,8 @@ tar -xvf alongtrack.tar.gz
 rm -f alongtrack.tar.gz
 ```
 
+</br>
+
+
+Either way, we recommand that the data be then stored in the `data/` repository.  
 

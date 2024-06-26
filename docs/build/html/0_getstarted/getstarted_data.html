@@ -450,25 +450,74 @@ document.write(`
 <br>
 <p>The dataset is presented with the following directory structure:</p>
 <hr class="docutils" />
+<section id="data-description">
+<h2>Data description<a class="headerlink" href="#data-description" title="Permalink to this headline">#</a></h2>
 <section id="data-for-experiment">
-<h2>1) Data for experiment<a class="headerlink" href="#data-for-experiment" title="Permalink to this headline">#</a></h2>
+<h3>1) Data for experiment<a class="headerlink" href="#data-for-experiment" title="Permalink to this headline">#</a></h3>
 <p><strong>Nadir alongtrack data (L3 products) for SSH map reconstruction</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>
-<span class="o">|--</span> <span class="n">alongtrack</span>
+<span class="o">|--</span> <span class="n">nadirs</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">c2n</span>		<span class="o">%</span> <span class="n">NRT</span> <span class="n">Cryosat</span><span class="o">-</span><span class="mi">2</span> <span class="n">new</span> <span class="n">orbit</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2023</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_c2n_phy_l3_1hz_2023</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2024</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_c2n_phy_l3_1hz_2024</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">h2b</span>		<span class="o">%</span> <span class="n">NRT</span> <span class="n">Haiyang</span><span class="o">-</span><span class="mi">2</span><span class="n">B</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2023</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_h2b_phy_l3_1hz_2023</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2024</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_h2b_phy_l3_1hz_2024</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">j3n</span>		<span class="o">%</span> <span class="n">NRT</span> <span class="n">Jason</span><span class="o">-</span><span class="mi">3</span> <span class="n">Interleaved</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2023</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_j3n_phy_l3_1hz_2023</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2024</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_j3n_phy_l3_1hz_2024</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">s3a</span>		<span class="o">%</span> <span class="n">NRT</span> <span class="n">Sentinel</span><span class="o">-</span><span class="mi">3</span><span class="n">A</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2023</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_s3a_phy_l3_1hz_2023</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2024</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_s3a_phy_l3_1hz_2024</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">s3b</span>		<span class="o">%</span> <span class="n">NRT</span> <span class="n">Sentinel</span><span class="o">-</span><span class="mi">3</span><span class="n">B</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2023</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_s3b_phy_l3_1hz_2023</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2024</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_s3b_phy_l3_1hz_2024</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">s6a_hr</span>		<span class="o">%</span> <span class="n">NRT</span> <span class="n">Sentinel</span><span class="o">-</span><span class="mi">6</span><span class="n">A</span> <span class="p">(</span><span class="n">SAR</span> <span class="n">mode</span><span class="p">)</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2023</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_s6a_hr_phy_l3_1hz_2023</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2024</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_s6a_hr_phy_l3_1hz_2024</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">swon</span>		<span class="o">%</span>  <span class="n">NRT</span> <span class="n">SWOT</span> <span class="n">nadir</span> <span class="mi">28</span><span class="n">days</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2023</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_swo_hr_phy_l3_1hz_2023</span><span class="o">*.</span><span class="n">nc</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2024</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_swo_hr_phy_l3_1hz_2024</span><span class="o">*.</span><span class="n">nc</span>
+</pre></div>
+</div>
+<p><strong>SWOT Karin data (L3 products) for SSH map reconstruction</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>
+<span class="o">|--</span> <span class="n">karin</span>
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
 <section id="data-for-evaluation">
-<h2>2) Data for evaluation<a class="headerlink" href="#data-for-evaluation" title="Permalink to this headline">#</a></h2>
+<h3>2) Data for evaluation<a class="headerlink" href="#data-for-evaluation" title="Permalink to this headline">#</a></h3>
 <p><strong>Independant nadir alongtrack data (L3 products) for SSH evaluation</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>
-<span class="o">|--</span> <span class="n">independant_alongtrack</span>
-<span class="o">|</span>   <span class="o">|--</span> <span class="n">al</span>		<span class="o">%</span> <span class="n">DT</span> <span class="n">Altika</span> <span class="n">Drifting</span> <span class="n">Phase</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
+<span class="o">|--</span> <span class="n">indep_nadir</span>
+<span class="o">|</span>   <span class="o">|--</span> <span class="n">al</span>		<span class="o">%</span> <span class="n">NRT</span> <span class="n">Altika</span> <span class="n">Drifting</span> <span class="n">Phase</span> <span class="n">Global</span> <span class="n">Ocean</span> <span class="n">Along</span> <span class="n">track</span> <span class="n">SSALTO</span><span class="o">/</span><span class="n">DUACS</span> <span class="n">Sea</span> <span class="n">Surface</span> <span class="n">Height</span> <span class="n">L3</span> <span class="n">product</span>
 <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2023</span>
 <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_al_phy_l3_1hz_2023</span><span class="o">*.</span><span class="n">nc</span>
 <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="mi">2024</span>
 <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|--</span> <span class="n">nrt_global_al_phy_l3_1hz_2024</span><span class="o">*.</span><span class="n">nc</span>
+
+</pre></div>
+</div>
+<p><strong>Independant drifter data (L3 products) for geostrophic current evaluation</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>
+<span class="o">|--</span> <span class="n">indep_drifters</span> 
+
 </pre></div>
 </div>
 <p><strong>Auxiliary data for diagnostics</strong></p>
@@ -483,7 +532,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="data-for-comparison">
-<h2>3) Data for comparison<a class="headerlink" href="#data-for-comparison" title="Permalink to this headline">#</a></h2>
+<h3>3) Data for comparison<a class="headerlink" href="#data-for-comparison" title="Permalink to this headline">#</a></h3>
 <p><strong>Reconstruction maps for comparison</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span>
 <span class="o">|--</span> <span class="n">maps</span>
@@ -494,17 +543,21 @@ document.write(`
 </pre></div>
 </div>
 </section>
+</section>
 <hr class="docutils" />
-<section id="id1">
-<h2>Download the data<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
-<p>The data can be downloaded locally using the wget command. We recommand that the data be stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> repository.
-For example, to download and unzip the experiment alongtrack data:</p>
+<section id="downloading-the-data">
+<h2>Downloading the data<a class="headerlink" href="#downloading-the-data" title="Permalink to this headline">#</a></h2>
+<p>The data can be downloaded locally directly from your browser by clicking here: <a class="reference external" href="https://ige-meom-opendap.univ-grenoble-alpes.fr/thredds/catalog/meomopendap/extract/MEOM/OCEAN_DATA_CHALLENGES/2024_DC_SSH_mapping_SWOT_OSE/catalog.html">Download</a></p>
+</br>
+<p>or by using the wget command, for example, to download and unzip the experiment alongtrack data:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">data</span><span class="o">/</span>
 <span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ige</span><span class="o">-</span><span class="n">meom</span><span class="o">-</span><span class="n">opendap</span><span class="o">.</span><span class="n">univ</span><span class="o">-</span><span class="n">grenoble</span><span class="o">-</span><span class="n">alpes</span><span class="o">.</span><span class="n">fr</span><span class="o">/</span><span class="n">thredds</span><span class="o">/</span><span class="n">fileServer</span><span class="o">/</span><span class="n">meomopendap</span><span class="o">/</span><span class="n">extract</span><span class="o">/</span><span class="n">MEOM</span><span class="o">/</span><span class="n">OCEAN_DATA_CHALLENGES</span><span class="o">/</span><span class="mi">2024</span><span class="n">_DC_SSH_mapping_SWOT_OSE</span><span class="o">/</span><span class="n">alongtrack</span><span class="o">/*</span> 
 <span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="n">alongtrack</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>  
 <span class="n">rm</span> <span class="o">-</span><span class="n">f</span> <span class="n">alongtrack</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
 </pre></div>
 </div>
+</br>
+<p>Either way, we recommand that the data be then stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> repository.</p>
 </section>
 </section>
 

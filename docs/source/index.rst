@@ -52,9 +52,29 @@ The goal of the present data-challenge is:
 This data challenge follows an Observation System Experiment framework: Satellite observations are from real sea surface height data from altimeter. 
 The practical goal of the challenge is to investigate the contribution of SWOT KaRin data and the best mapping method according to scores described below and in Jupyter notebooks.
  
-    
      
+.. raw:: html
+ 
+    <embed>  
+        </br>
+        
+        </hr>
+        
+        </br>
+        
+    </embed>
 
+
+Data sequence and use  
+=====================
+ 
+The SSH reconstructions are assessed at global scale and over the period from 2023-08-01 to 2024-05-01.
+The SSH reconstructions can also be assessed at regional scale and over the same period from 2023-08-01 to 2024-05-01.
+
+For reconstruction methods that need a spin-up, the **observations** from other period can be used.
+
+The altimeter data from Saral/AltiKa data described below should never be used so that any reconstruction can be considered uncorrelated to the evaluation period.
+     
      
 .. raw:: html
  
@@ -67,20 +87,21 @@ The practical goal of the challenge is to investigate the contribution of SWOT K
         
     </embed>
     
+     
 
-Observations  
-============
+    
+
+Mapping observations  
+====================
 
 
-Nadirs sea-level anomaly Level 3 products
------------------------------------------
+- **Nadirs sea-level anomaly Level 3 products**
 
-To produce the gridded sea level maps, we used the global ocean sea level anomaly observations from the Near-Real-Time (NRT) Level-3 altimeter satellite along-track data distributed by the EU Copernicus Marine Service (product reference [SEALEVEL_GLO_PHY_L3_NRT_008_044](https://data.marine.copernicus.eu/product/SEALEVEL_GLO_PHY_L3_NRT_008_044/description)), specifically for the Jason-3, Sentinel-3A, Sentinel-3B, Sentinel-6A, SARAL-Altika, Cryosat-2, Haiyang-2B, missions. This dataset covers the global ocean and is available at a sampling rate of 1 Hz (approximately 7 km spatial spacing).
+To produce the gridded sea level maps, the global ocean sea level anomaly observations from the Near-Real-Time (NRT) Level-3 altimeter satellite along-track data can be used. These data are distributed by the EU Copernicus Marine Service (product reference `SEALEVEL_GLO_PHY_L3_NRT_08_044 <https://data.marine.copernicus.eu/product/SEALEVEL_GLO_PHY_L3_NRT_008_044/description>`_), specifically for the Jason-3, Sentinel-3A, Sentinel-3B, Sentinel-6A, Cryosat-2, Haiyang-2B, missions. The SWOT nadir, distributed on the AVISO+ portal (AVISO/DUACS, 2023), can also be used to produce the gridded sea level maps.  This dataset covers the global ocean and is available at a sampling rate of 1 Hz (approximately 7 km spatial spacing).
 
-SWOT sea-level anomaly Level 3 products
----------------------------------------
+- **SWOT sea-level anomaly Level 3 products**
 
-In addition to the nadir altimetry constellation previously mentioned, we conducted experiments involving the integration of SWOT Level-3 Ocean product (specifically referencing [SWOT_L3_SSH](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/swot-l3-ocean-products.html)) during the 21-day phase of the mission. The SWOT_L3_SSH product combines ocean topography measurements collected from both the SWOT KaRIn and nadir altimeter instruments, consolidating them into a unified variable on a 2 km spatial grid spacing. For our investigation, we used version 0.3 & version 1.0 of the product accessible through the AVISO+ portal (AVISO/DUACS, 2023). These data were derived from the Level-2 "Beta Pre-validated" KaRIn Low Rate (Ocean) product (NASA/JPL and CNES).
+In addition to the nadir altimetry constellation previously mentioned, we conducted experiments involving the integration of SWOT Level-3 Ocean product (specifically referencing `SWOT_L3_SSH <https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/swot-l3-ocean-products.html>`_) during the 21-day phase of the mission. The SWOT_L3_SSH product combines ocean topography measurements collected from both the SWOT KaRIn and nadir altimeter instruments, consolidating them into a unified variable on a 2 km spatial grid spacing. For our investigation, we used version 0.3 & version 1.0 of the product accessible through the AVISO+ portal (AVISO/DUACS, 2023). These data were derived from the Level-2 "Beta Pre-validated" KaRIn Low Rate (Ocean) product (NASA/JPL and CNES).
 
 
      
@@ -101,18 +122,21 @@ In addition to the nadir altimetry constellation previously mentioned, we conduc
         
         </br>
     </embed>
+    
+    
+Evaluation observations  
+=======================
+
+- **Independent nadir sea-level anomaly Level 3 product: Saral-Altika**
 
 
-Data sequence and use  
-=====================
- 
-The SSH reconstructions are assessed at global scale and over the period from 2023-08-01 to 2024-05-01.
-The SSH reconstructions can also be assessed at regional scale and over the same period from 2023-08-01 to 2024-05-01.
+To evaluate the gridded sea level maps, the Near-Real-Time (NRT) Level-3 altimeter satellite along-track data at a sampling rate of 1 Hz (approximately 7 km spatial spacing) from the Saral-Altika mission can be used. The Saral-Altika sea level data are also distributed by the EU Copernicus Marine Service (product reference `SEALEVEL_GLO_PHY_L3_NRT_008_044 <https://data.marine.copernicus.eu/product/SEALEVEL_GLO_PHY_L3_NRT_008_044/description>`_). 
 
-For reconstruction methods that need a spin-up, the **observations** from other period can be used.
 
-The altimeter data from Saral/AltiKa data mentioned above should never be used so that any reconstruction can be considered uncorrelated to the evaluation period.
-     
+- **Independent drifter 15m-depth current and trajectories**
+
+The geostrophic current derived from the gridded sea level reconstructed maps can be evaluated using in situ drifter data, which are also distributed by CMEMS `https://doi.org/10.17882/86236 <https://doi.org/10.17882/86236>`_. From these data the 15m depth current measured by the drifters and the trajectory of the drifters can be used compared to the evaluate the reconstructed geostrophic current maps. 
+
      
 .. raw:: html
  
@@ -126,8 +150,8 @@ The altimeter data from Saral/AltiKa data mentioned above should never be used s
     </embed>
     
      
-More data challenges   
-====================
+For more data challenges   
+========================
 
 If you are interested in more data challenges relating to oceanographic data (global altimetric mapping, SWOT preprocessing techniques ...), you can visit the ocean-data-challenges website. 
   
