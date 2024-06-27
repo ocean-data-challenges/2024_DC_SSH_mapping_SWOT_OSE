@@ -1,16 +1,16 @@
 # 2024_DC_SSH_mapping_SWOT_OSE
 A challenge on the mapping of real nadirs and KaRin satellite altimeter sea surface height data organised by Datlas and CLS.
 
+
+
+<p align="center">
+  <a href="https://2024-dc-ssh-mapping-swot-ose.readthedocs.io/en/latest/index.html"/> Data challenge website </a>
+</p>
+
+
 ## :warning: WORK in progress. This data-challenge is still under construction
   
    
-
-<p align="center">
-  <a href="https://2024-dc-ssh-mapping-swot-ose.readthedocs.io/en/latest/index.html"/>
-    <h2> Data challenge website </h2>
-  </a>
-</p>
-
 
 # SWOT SSH Mapping Data Challenge 2024
 
