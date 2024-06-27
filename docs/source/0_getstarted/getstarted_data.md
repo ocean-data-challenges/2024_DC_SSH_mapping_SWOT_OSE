@@ -134,13 +134,13 @@ The data can be downloaded locally directly from your browser by clicking here: 
 
 </br>
 
-or by using the wget command, for example, to download and unzip the experiment alongtrack data: 
+or by using the wget command, for example, to download and unzip the experiment nadir data: 
 
 ``` 
 cd data/
-wget https://ige-meom-opendap.univ-grenoble-alpes.fr/thredds/fileServer/meomopendap/extract/MEOM/OCEAN_DATA_CHALLENGES/2024_DC_SSH_mapping_SWOT_OSE/alongtrack/* 
-tar -xvf alongtrack.tar.gz  
-rm -f alongtrack.tar.gz
+wget https://ige-meom-opendap.univ-grenoble-alpes.fr/thredds/fileServer/meomopendap/extract/MEOM/OCEAN_DATA_CHALLENGES/2024_DC_SSH_mapping_SWOT_OSE/nadirs.tar.gz 
+tar -xvf nadirs.tar.gz  
+rm -f nadirs.tar.gz
 ```
 
 </br>

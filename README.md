@@ -3,6 +3,15 @@ A challenge on the mapping of real nadirs and KaRin satellite altimeter sea surf
 
 ## :warning: WORK in progress. This data-challenge is still under construction
   
+   
+
+<p align="center">
+  <a href="https://2024-dc-ssh-mapping-swot-ose.readthedocs.io/en/latest/index.html"/>
+    <h2> Data challenge website </h2>
+  </a>
+</p>
+
+
 # SWOT SSH Mapping Data Challenge 2024
 
 This repository contains codes and sample notebooks for downloading and processing the 2024 SWOT SSH mapping data challenge.
