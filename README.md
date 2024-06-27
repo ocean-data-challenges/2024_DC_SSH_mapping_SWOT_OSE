@@ -4,9 +4,12 @@ A challenge on the mapping of real nadirs and KaRin satellite altimeter sea surf
 
 
 <p align="center">
+  <b>
   <a href="https://2024-dc-ssh-mapping-swot-ose.readthedocs.io/en/latest/index.html"/> Data challenge website </a>
+  </b>
 </p>
 
+</br>
 
 ## :warning: WORK in progress. This data-challenge is still under construction
   
