@@ -12,14 +12,7 @@ git clone git@github.com:ocean-data-challenges/2024_DC_SSH_mapping_SWOT_OSE.git
 
 ## Creating the environment  
 
-Pip install the package from GitLab directly, in order to have the latest version: 
- 
-
-```
-pip install git+ssh://git@git.oceandatalab.com:5546/woc/velocity_metrics.git
-```
-
-create the data challenge conda environment, named env-dc-global-ose, by running the following command:
+Create the data challenge conda environment, named env-dc-global-ose, by running the following command:
 ```
 conda env create --file=dc_environment.yml 
 ```
