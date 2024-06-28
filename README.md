@@ -4,12 +4,14 @@ A challenge on the mapping of real nadirs and KaRin satellite altimeter sea surf
 
 
 <p align="center">
-  <font size="5">
+  <font size="8">
   <b>
   <a href="https://2024-dc-ssh-mapping-swot-ose.readthedocs.io/en/latest/index.html"/> Check out the data challenge website for more infos </a>
   </b>
   </font>
 </p>
+
+</br>
 
 </br>
 
@@ -19,11 +21,11 @@ A challenge on the mapping of real nadirs and KaRin satellite altimeter sea surf
 Community projects
 ================
 * **Ocean Data Challenges** [https://github.com/ocean-data-challenges]
-    - Artificial SWOT data calibration (Gulf Stream): https://github.com/ocean-data-challenges/2022c_SWOT_error_calibration_GS
-    - Artificial SWOT data denoising (North Atlantic): https://github.com/ocean-data-challenges/2022a_SWOT_karin_error_filtering
-    - Artificial SWOT data mapping (Gulf Stream): https://github.com/ocean-data-challenges/2020a_SSH_mapping_NATL60
-    - Real SWOT data denoising (multiple regions) -- under construction: https://github.com/ocean-data-challenges/2024b_DC_SWOTdenoising
-    - Real SWOT data mapping (global) -- under construction: https://github.com/ocean-data-challenges/2024_DC_SSH_mapping_SWOT_OSE
+    - Artificial SWOT data calibration (Gulf Stream): [2022c_SWOT_error_calibration_GS](https://github.com/ocean-data-challenges/2022c_SWOT_error_calibration_GS)
+    - Artificial SWOT data denoising (North Atlantic): [2022a_SWOT_karin_error_filtering](https://github.com/ocean-data-challenges/2022a_SWOT_karin_error_filtering)
+    - Artificial SWOT data mapping (Gulf Stream): [2020a_SSH_mapping_NATL60](https://github.com/ocean-data-challenges/2020a_SSH_mapping_NATL60)
+    - Real SWOT data denoising (multiple regions) -- under construction: [2024b_DC_SWOTdenoising](https://github.com/ocean-data-challenges/2024b_DC_SWOTdenoising)
+    - Real SWOT data mapping (global) -- under construction: [2024_DC_SSH_mapping_SWOT_OSE](https://github.com/ocean-data-challenges/2024_DC_SSH_mapping_SWOT_OSE)
     
     
 * **SWOT Swell** [https://github.com/ardhuin/swellSWOT/]
