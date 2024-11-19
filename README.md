@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14187279.svg)](https://doi.org/10.5281/zenodo.14187279)
+
 # 2024_DC_SSH_mapping_SWOT_OSE
 A challenge on the mapping of real nadirs and KaRin satellite altimeter sea surface height data organised by Datlas and CLS.
 
