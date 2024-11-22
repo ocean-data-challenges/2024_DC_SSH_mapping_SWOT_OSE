@@ -133,6 +133,78 @@ def bin_data(ds, output_file, lon_out=np.arange(0, 360, 1), lat_out=np.arange(-9
 
     ds1.to_netcdf(output_file, group="all_scale", format="NETCDF4")
     ds2.to_netcdf(output_file, "a", group="filtered", format="NETCDF4")
+
+
+    
+    
+def compute_statistical_test(ds_ref, ds_study, variable, grid_lon=np.arange(0., 360., 1.0), grid_lat=np.arange(-90., 90., 1.0)):
+    # ds_ref = ds_interp_3nadirs['mapping_err']
+    # ds_interp_6nadirs['mapping_err']
+    from scipy.stats import ttest_rel
+
+    delta_lat = 1
+    delta_lon = 1
+    
+    lat = ds_ref.latitude.values
+    lon = ds_ref.longitude.values
+
+
+    data_t_statistic = np.zeros((grid_lat.size, grid_lon.size))
+    data_p_value = np.zeros((grid_lat.size, grid_lon.size))
+    rmse1 = np.zeros((grid_lat.size, grid_lon.size))
+    rmse2 = np.zeros((grid_lat.size, grid_lon.size))
+
+    jj = 0
+    for ilat in grid_lat:
+        # print(ilat)
+
+        lat_min = ilat - 0.5*delta_lat
+        lat_max = ilat + 0.5*delta_lat
+
+        selected_lat_index = np.where(np.logical_and(lat >= lat_min, lat <= lat_max))[0]
+        err_ref_tmp = ds_ref[variable].values[selected_lat_index]
+        err_study_tmp = ds_study[variable].values[selected_lat_index]
+
+        ii = 0
+
+        for ilon in grid_lon % 360.:
+
+            lon_min = ilon - 0.5*delta_lon
+            lon_max = ilon + 0.5*delta_lon
+
+            if (lon_min < 0.) and (lon_max > 0.):
+                selected_index = np.where(np.logical_or(lon[selected_lat_index] % 360. >= lon_min + 360.,
+                                                              lon[selected_lat_index] % 360. <= lon_max))[0]
+            elif (lon_min > 0.) and (lon_max > 360.):
+                selected_index = np.where(np.logical_or(lon[selected_lat_index] % 360. >= lon_min,
+                                                              lon[selected_lat_index] % 360. <= lon_max - 360.))[0]
+            else:
+                selected_index = np.where(np.logical_and(lon[selected_lat_index] % 360. >= lon_min,
+                                                               lon[selected_lat_index] % 360. <= lon_max))[0]
+
+                if len(selected_index) > 0:
+
+                    selected_data_ref = np.ma.masked_where(err_ref_tmp[selected_index].flatten() > 1.E10,
+                                                               err_ref_tmp[selected_index].flatten())
+                    selected_data_study = np.ma.masked_where(err_study_tmp[selected_index].flatten() > 1.E10,
+                                                               err_study_tmp[selected_index].flatten())
+
+                    t_statistic, p_value = ttest_rel(selected_data_ref**2, selected_data_study**2)
+
+                    data_t_statistic[jj, ii] = t_statistic
+                    data_p_value[jj, ii] = p_value
+                    rmse1[jj, ii] = np.sqrt(np.mean(selected_data_ref**2))
+                    rmse2[jj, ii] = np.sqrt(np.mean(selected_data_study**2))
+
+            ii += 1
+
+        jj += 1
+        
+    
+    return rmse1, rmse2, data_t_statistic, data_p_value
+
+
+
     
 
 def compute_stat_scores(ds_interp, lambda_min, lambda_max, output_file):
@@ -153,6 +225,98 @@ def compute_stat_scores(ds_interp, lambda_min, lambda_max, output_file):
     
     logging.info("Compute statistics by oceanic regime")
     compute_stat_scores_by_regimes(ds_interp, output_file)
+    
+    logging.info("Stat file saved as: %s", output_file)
+
+    
+def dm_test(e1, e2, h = 1):
+    
+    # Import libraries
+    from scipy.stats import t
+    import collections
+    import pandas as pd
+    import numpy as np
+    
+    # Length of lists (as real numbers)
+    T = e1.size
+        
+    d_lst = (e1 - e2)
+    # Mean of d        
+    mean_d = np.mean(d_lst)
+    
+    # Find autocovariance and construct DM test statistics
+    def autocovariance(Xi, N, k, Xs):
+        autoCov = 0
+        T = float(N)
+        for i in np.arange(0, N-k):
+              autoCov += ((Xi[i+k])-Xs)*(Xi[i]-Xs)
+        return (1/(T))*autoCov
+    gamma = []
+    for lag in range(0,h):
+        gamma.append(autocovariance(d_lst,len(d_lst),lag,mean_d)) # 0, 1, 2
+    V_d = (gamma[0] + 2*sum(gamma[1:]))/T
+    DM_stat=V_d**(-0.5)*mean_d
+    harvey_adj=((T+1-2*h+h*(h-1)/T)/T)**(0.5)
+    DM_stat = harvey_adj*DM_stat
+    # Find p-value
+    p_value = 2*t.cdf(-abs(DM_stat), df = T - 1)
+    
+    
+    return DM_stat, p_value
+
+
+    
+def compute_stat_scores_intercompare(ds_interp1, ds_interp2, lambda_min, lambda_max, output_file):
+    
+    #logging.info("Interpolate SLA maps onto alongtrack")
+    #ds_interp = run_interpolation(ds_maps, ds_alongtrack)
+     
+    logging.info("Compute mapping error all scales")
+    ds_interp1['mapping_err'] = ds_interp1['msla_interpolated'] - (ds_interp1['sla_unfiltered'] - ds_interp1['lwe'])
+    
+    ds_interp2['mapping_err'] = ds_interp2['msla_interpolated'] - (ds_interp2['sla_unfiltered'] - ds_interp1['lwe'])
+    
+    logging.info("Compute mapping error for scales between %s and %s km", str(lambda_min), str(lambda_max))
+    # Apply bandpass filter
+    ds_interp1 = apply_bandpass_filter(ds_interp1, lambda_min=lambda_min, lambda_max=lambda_max)
+    ds_interp2 = apply_bandpass_filter(ds_interp2, lambda_min=lambda_min, lambda_max=lambda_max)
+    
+    lon_out=np.arange(0, 360, 1)
+    lat_out=np.arange(-90, 90, 1)
+    
+    logging.info("Compute binning statistics")
+    # Bin data maps
+    
+    rmse_ref, rmse_study, data_t_statistic, data_p_value = compute_statistical_test(ds_interp1, ds_interp2, variable='mapping_err')
+    
+    ds1 = xr.Dataset({
+                      'rmse_ref' : (('lat', 'lon'), rmse_ref),
+                      'rmse_study' : (('lat', 'lon'), rmse_study),
+                      't_statistic' : (('lat', 'lon'), data_t_statistic), 
+                      'p_value' : (('lat', 'lon'), data_p_value), 
+                      },
+                      coords={'lon': lon_out, 
+                              'lat': lat_out,
+                               }
+                       )
+    
+    ds1.to_netcdf(output_file, group="all_scale", format="NETCDF4")
+    
+    rmse_ref2, rmse_study2, data_t_statistic2, data_p_value2 = compute_statistical_test(ds_interp1, ds_interp2, variable='mapping_err_filtered')
+    
+    ds2 = xr.Dataset({
+                      'rmse_ref' : (('lat', 'lon'), rmse_ref2),
+                      'rmse_study' : (('lat', 'lon'), rmse_study2),
+                      't_statistic' : (('lat', 'lon'), data_t_statistic2), 
+                      'p_value' : (('lat', 'lon'), data_p_value2), 
+                      },
+                      coords={'lon': lon_out, 
+                              'lat': lat_out,
+                               }
+                       )
+    
+    
+    ds2.to_netcdf(output_file, "a", group="filtered", format="NETCDF4")
     
     logging.info("Stat file saved as: %s", output_file)
     

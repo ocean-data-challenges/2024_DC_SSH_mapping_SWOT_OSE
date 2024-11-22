@@ -1415,3 +1415,113 @@ def compare_psd_score_png(study_filename, ref_filename):
     cax = fig.add_axes([0.95, 0.67, 0.02, 0.2])
     fig.colorbar(p0, cax=cax, orientation='vertical')
     cax.set_ylabel('Efective resolition [km]', fontweight='bold')
+    
+    
+    
+def plot_stat_score_map_png_compa(filename):
+
+    ds_binning_allscale = xr.open_dataset(filename, group='all_scale')
+    ds_binning_filtered = xr.open_dataset(filename, group='filtered')
+    
+    
+    
+    
+    fig, axs = plt.subplots(nrows=2,ncols=2,
+                        subplot_kw={'projection': ccrs.PlateCarree()},
+                        figsize=(11,7.5))
+
+    axs=axs.flatten()
+    
+    vmin = 0.
+    vmax= 0.1
+    p0 = axs[0].pcolormesh(ds_binning_allscale.lon, ds_binning_allscale.lat, ds_binning_allscale.rmse_ref, vmin=vmin, vmax=vmax, cmap='Reds')
+    axs[0].set_title('SSH [All scale]')
+    axs[0].coastlines(resolution='10m', lw=0.5)
+    # optional add grid lines
+    p0.axes.gridlines(color='black', alpha=0., linestyle='--')
+    # draw parallels/meridiens and write labels
+    gl = p0.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
+                          linewidth=0.1, color='black', alpha=0.5, linestyle='--')
+    # adjust labels to taste
+    gl.xlabels_top = False
+    gl.ylabels_right = False
+    gl.xlabels_bottom = False
+    gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
+    gl.xformatter = LONGITUDE_FORMATTER
+    gl.yformatter = LATITUDE_FORMATTER
+    gl.xlabel_style = {'size': 10, 'color': 'black'}
+    gl.ylabel_style = {'size': 10, 'color': 'black'}
+    
+    p1 = axs[1].pcolormesh(ds_binning_filtered.lon, ds_binning_filtered.lat, ds_binning_filtered.rmse_ref, vmin=vmin, vmax=vmax, cmap='Reds')
+    axs[1].set_title('SSH [65-200km]')
+    axs[1].coastlines(resolution='10m', lw=0.5)
+    # optional add grid lines
+    p1.axes.gridlines(color='black', alpha=0., linestyle='--')
+    # draw parallels/meridiens and write labels
+    gl = p1.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
+                          linewidth=0.1, color='black', alpha=0.5, linestyle='--')
+    # adjust labels to taste
+    gl.xlabels_top = False
+    gl.ylabels_right = False
+    gl.ylabels_left = False
+    gl.xlabels_bottom = False
+    gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
+    gl.xformatter = LONGITUDE_FORMATTER
+    gl.yformatter = LATITUDE_FORMATTER
+    gl.xlabel_style = {'size': 10, 'color': 'black'}
+    gl.ylabel_style = {'size': 10, 'color': 'black'}
+    
+    vmin = -0.01
+    vmax= 0.01
+    p2 = axs[2].pcolormesh(ds_binning_allscale.lon, ds_binning_allscale.lat, ds_binning_allscale.rmse_study - ds_binning_allscale.rmse_ref, vmin=vmin, vmax=vmax, cmap='coolwarm')
+    lon2d, lat2d = np.meshgrid(ds_binning_allscale.lon, ds_binning_allscale.lat)
+    idx = np.where(ds_binning_allscale.p_value.values.flatten() > 0.05 )[0]
+    axs[2].scatter(lon2d.flatten()[idx], lat2d.flatten()[idx], s=0.01, marker='x', c='y', alpha=1)
+    
+    axs[2].set_title('$\Delta$RMSE [All scale]')
+    axs[2].coastlines(resolution='10m', lw=0.5)
+    # optional add grid lines
+    p2.axes.gridlines(color='black', alpha=0., linestyle='--')
+    # draw parallels/meridiens and write labels
+    gl = p2.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
+                          linewidth=0.1, color='black', alpha=0.5, linestyle='--')
+    # adjust labels to taste
+    gl.xlabels_top = False
+    gl.ylabels_right = False
+    gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
+    gl.xformatter = LONGITUDE_FORMATTER
+    gl.yformatter = LATITUDE_FORMATTER
+    gl.xlabel_style = {'size': 10, 'color': 'black'}
+    gl.ylabel_style = {'size': 10, 'color': 'black'}
+    
+    
+    p3 = axs[3].pcolormesh(ds_binning_allscale.lon, ds_binning_allscale.lat, ds_binning_filtered.rmse_study - ds_binning_filtered.rmse_ref, vmin=vmin, vmax=vmax, cmap='coolwarm')
+    idx = np.where(ds_binning_filtered.p_value.values.flatten() > 0.05 )[0]
+    axs[3].scatter(lon2d.flatten()[idx], lat2d.flatten()[idx], s=0.01, marker='x', c='y', alpha=1.)
+    axs[3].set_title('$\Delta$RMSE [65-200km]')
+    axs[3].coastlines(resolution='10m', lw=0.5)
+    # optional add grid lines
+    p3.axes.gridlines(color='black', alpha=0., linestyle='--')
+    # draw parallels/meridiens and write labels
+    gl = p3.axes.gridlines(crs=ccrs.PlateCarree(), draw_labels=True,
+                          linewidth=0.1, color='black', alpha=0.5, linestyle='--')
+    # adjust labels to taste
+    gl.xlabels_top = False
+    gl.ylabels_left = False
+    gl.ylabels_right = False
+    gl.ylocator = mticker.FixedLocator([-90, -60, -30, 0, 30, 60, 90])
+    gl.xformatter = LONGITUDE_FORMATTER
+    gl.yformatter = LATITUDE_FORMATTER
+    gl.xlabel_style = {'size': 10, 'color': 'black'}
+    gl.ylabel_style = {'size': 10, 'color': 'black'}
+    
+    cax = fig.add_axes([0.92, 0.25, 0.02, 0.25])
+    fig.colorbar(p3, cax=cax, orientation='vertical')
+    cax.set_ylabel('$\Delta$RMSE [m]', fontweight='bold')
+    
+    cax = fig.add_axes([0.92, 0.6, 0.02, 0.25])
+    cbar = fig.colorbar(p1, cax=cax, orientation='vertical')
+    cax.set_ylabel('RMSE [m]', fontweight='bold')
+    
+    fig.subplots_adjust(bottom=0.2, top=0.9, left=0.1, right=0.9,
+                    wspace=0.02, hspace=0.01)
